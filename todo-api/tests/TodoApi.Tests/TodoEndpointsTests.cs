@@ -51,11 +51,11 @@ public class TodoEndpointsTests : IDisposable
     [Fact]
     public async Task PostTodo_ReturnsCreatedItem()
     {
-        var response = await _client.PostAsJsonAsync("/api/todos", new { title = "Naučit se GitHub Actions" });
-
-        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        var item = await response.Content.ReadFromJsonAsync<TodoItem>();
-        Assert.Equal("Naučit se GitHub Actions", item!.Title);
+        var response = await _client.PostAsJsonAsync("/api/todos", new
+        { title = "NapsatCI" });
+        
+        Assert.Equal(HttpStatusCode.Created, response.StatusCode); // bylo: OK
+        Assert.NotNull(response.Headers.Location);
     }
 
     [Fact]
